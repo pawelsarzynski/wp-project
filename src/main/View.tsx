@@ -8,7 +8,9 @@ import {
   OpponentSection,
   TeamSection,
   Pokemon,
+  RevivePopup,
 } from "./view.styles";
+import { getRandomInt } from "../helpers/getRandomInt";
 
 export const View: FC = () => {
   const [team, setTeam] = useState<any[]>([]);
@@ -96,8 +98,23 @@ export const View: FC = () => {
 
   if (!team.length) return <p>Loading...</p>;
 
+  const allDead = team.every((p) => p.stats.hp <= 0);
+  const reviveTeam = () =>
+    setTeam(
+      team.map((p) => ({
+        ...p,
+        stats: { ...p.stats, hp: getRandomInt(1, 100) },
+      }))
+    );
+
   return (
     <Container>
+      {allDead && (
+        <RevivePopup>
+          <h3>All your pokemon fainted</h3>
+          <button onClick={reviveTeam}>Revive!</button>
+        </RevivePopup>
+      )}
       <OpponentSection isAttacking={attacker.name}>
         {opponent.name ? (
           <Pokemon isOpponent isAttacking={opponent.name === attacker.name}>

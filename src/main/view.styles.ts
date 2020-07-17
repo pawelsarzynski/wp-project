@@ -109,7 +109,7 @@ const Pokemon = styled.div<PokemonProps>`
   flex-direction: column;
   align-items: center;
   width: 160px;
-  height: 172px;
+  height: 192px;
   border: 1px solid #ccc;
   border-radius: 8px;
   background: #ddd;
@@ -137,4 +137,42 @@ const Pokemon = styled.div<PokemonProps>`
   }
 `;
 
-export { Container, OpponentSection, TeamSection, Pokemon };
+const RevivePopup = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 160px;
+  height: 240px;
+  background-color: #ccc;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 5px 5px 20px 3px #666;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+
+  button {
+    width: 88px;
+    height: 44px;
+    border-radius: 8px;
+    background-color: #bd7cd8;
+    outline: none;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
+  h3 {
+    text-align: center;
+  }
+`;
+
+export { Container, OpponentSection, TeamSection, Pokemon, RevivePopup };

@@ -1,28 +1,28 @@
 import { getRandomInt } from "../helpers/getRandomInt";
 
 abstract class Creator {
-  public abstract factoryMethod(): Product;
+  public abstract factoryMethod(): Pokemon;
 
   public serializePokemon(
     item: Record<string, unknown>
   ): Record<string, unknown> {
-    const product = this.factoryMethod();
+    const pokemon = this.factoryMethod();
 
-    return product.serialize(item);
+    return pokemon.serialize(item);
   }
 }
 
 export class PokemonCreator extends Creator {
-  public factoryMethod(): Product {
+  public factoryMethod(): Pokemon {
     return new ConcretePokemon();
   }
 }
 
-interface Product {
+interface Pokemon {
   serialize(item: Record<string, unknown>): Record<string, unknown>;
 }
 
-class ConcretePokemon implements Product {
+class ConcretePokemon implements Pokemon {
   public serialize(item: Record<string, any>): Record<string, unknown> {
     return {
       name: item.name,
